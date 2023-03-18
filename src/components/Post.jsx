@@ -31,6 +31,16 @@ export function Post(props) {
     function handleNewCommentChange() {
         setNewCommentText(event.target.value)
     }
+
+    function deleteComment(commentToDelete){
+        const commentsWithoutDeletedOne = comments.filter(comment => { //metodo filter percorre o array retornando valores de acordo com condicao
+            return comment != commentToDelete; //retorna apenas valores diferentes do comment que queremos deletar
+        })
+
+
+
+        setComments(commentsWithoutDeletedOne); //atualiza o array de comentarios com o novo array gerando acima
+    }
     return (
         <article className={styles.post}>
             <header>
@@ -50,9 +60,9 @@ export function Post(props) {
                 {
                     props.content.map(line => {
                         if(line.type == 'paragraph'){
-                            return <p>{line.content}</p>
+                            return <p key={line.content}>{line.content}</p>
                         }else if(line.type == 'link'){
-                            return <a href='#'>{line.content}</a>
+                            return <p key={line.content}><a href='#'>{line.content}</a></p>
                         }
                     })
                 }
@@ -76,7 +86,7 @@ export function Post(props) {
 
             <div className={styles.commentList}>
                 {comments.map(comment => {
-                    return <Comment content={comment}/>
+                    return <Comment deleteComment={deleteComment} key={comment} content={comment}/>
                 })}
 
             </div>

@@ -32,7 +32,7 @@ const posts  = [
       role: 'Educador',
     },
     content: [
-      {type: 'paragraph', content: 'Fala galeraa 👋'}, 
+      {type: 'paragraph', content: 'Fala galeraaa 👋'}, 
       {type: 'paragraph', content: 'Ola. Esse e o texto do segundo item do array 🚀'},
       {type: 'link', content: '👉 jane.design/doctorcare'},
     ],
@@ -60,6 +60,7 @@ export function App() {
           {posts.map(post => {
             return (
               <Post 
+                key={post.id}
                 author={post.author}
                 content={post.content}
                 publishedAt={post.publishedAt}
